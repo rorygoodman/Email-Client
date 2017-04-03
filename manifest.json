@@ -4,7 +4,9 @@
   "name": "Gmail Encryption",
   "description": "This extension encrypts the sending and receiving of emails from gmail",
   "version": "1.0",
-
+  "browser_action":{
+    "default_popup": "popup.html"
+  },
   "permissions": [
     "https://mail.google.com/",
     "https://inbox.google.com/",
@@ -13,7 +15,7 @@
   "content_scripts" : [
     {
       "matches": ["https://mail.google.com/*", "https://inbox.google.com/*"],
-      "js": ["inboxsdk.js", "popup.js","cryptico.js","aes.js","api.js","cryptico.min.js","hash.js","jsbn.js","popup.js","random.js","rsa.js"]
+      "js": ["inboxsdk.js", "popup.js","cryptico.js","aes.js","api.js","cryptico.min.js","hash.js","jsbn.js","popup.js","random.js","rsa.js","keys.js"]
     }
   ]
 }

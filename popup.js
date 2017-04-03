@@ -15,7 +15,8 @@ InboxSDK.load('1.0', 'sdk_RorysExtension_1566b5062a').then(function(sdk){
         var text = composeView.getTextContent();
         var roryPublic = cryptico.publicKeyString(roryRSA);
         var encrypted = cryptico.encrypt(text,roryPublic);
-        event.composeView.insertTextIntoBodyAtCursor(encrypted.cipher);
+        event.composeView.setBodyText(encrypted.cipher);
+        console.log(encrypted.status);
       },
     });
 
@@ -38,9 +39,12 @@ InboxSDK.load('1.0', 'sdk_RorysExtension_1566b5062a').then(function(sdk){
     var bottom;
     for(i=0;i<messages.length;i++){
       top = innerHTMLs[i].indexOf("ltr")+5;
-      text[i]=innerHTMLs[i].substr(top,innerHTMLs[i].substr(top,innerHTMLs[i].length).indexOf("<"));
+      text[i]=innerHTMLs[i].substr(top,innerHTMLs[i].substr(top,innerHTMLs[i].length).indexOf("</div"));
+      text[i]=text[i].replace(/\<wbr>/g,'')
     }
+    var DecryptionResult = cryptico.decrypt(text[0],roryRSA);
     console.log(text[0]);
+    console.log(DecryptionResult.plaintext);
 
     
   })
